@@ -1,0 +1,70 @@
+body, #app {
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+}
+
+#menubar {
+    padding-left: 16px;
+}
+
+#canvascontainer {
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+}
+
+#fullscreen-open, #fullscreen-close {
+    padding: 0 5px;
+}
+
+.dropdown-menu {
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.dropdown-item {
+    margin-right: 10px;
+}
+
+/* Remove arrow buttons in number input */
+
+/* Chrome, Safari, Edge, Opera */
+#valueinput::-webkit-outer-spin-button,
+#valueinput::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+#valueinput {
+    -moz-appearance: textfield;
+}
+
+/* Mobile adjustments */
+
+@media screen and (max-width: 992px) {
+    .form-inline {
+        margin: 5px 0;
+    }
+
+    #menubar {
+        padding-right: 16px;
+        max-height: 100vh;
+        overflow-y: auto;
+    }
+
+    #mainmenubar {
+        padding-bottom: 8px;
+    }
+
+    .hideonmobile {
+        display: none;
+    }
+}
+
+@media screen and (orientation: portrait) {
+    #canvascontainer div {
+        min-height: 100%;
+    }
+}
