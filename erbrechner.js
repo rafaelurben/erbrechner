@@ -59,27 +59,35 @@ class Person {
 
         // Distribution
         if (Person.root.partner && Person.root.partner.alive) {
+            // Root has partner
             if (Person.root.isParental1Alive) {
-                Person.root.partner.share_percent = 1 / 2;
-                Person.root.partner.min_share_percent = (1 / 2) * (1 / 2);
+                // Root has partner and decendants (children, grandchildren)... (parental 1)
+                Person.root.partner.share_percent = 0.5;
+                Person.root.partner.min_share_percent = 0.25;
 
-                Person.root.distributeToParental1(1 / 2, 3 / 4, true);
+                Person.root.distributeToParental1(0.5, 0.5);
             } else if (Person.root.isParental2Alive) {
-                Person.root.partner.share_percent = 3 / 4;
-                Person.root.partner.min_share_percent = (3 / 4) * (1 / 2);
+                // Root has partner and parents or their decendants (siblings, nephews & nieces...) (parental 2)
+                Person.root.partner.share_percent = 0.75;
+                Person.root.partner.min_share_percent = 0.375;
 
-                Person.root.distributeToParental2(1 / 4, 1 / 2)
+                Person.root.distributeToParental2(1 / 4)
             } else {
-                Person.root.partner.share_percent = 1 / 1;
-                Person.root.partner.min_share_percent = (1 / 1) * (1 / 2);
+                // Root has partner and grandparents or their decendants (parental 3) - these do not get anything
+                Person.root.partner.share_percent = 1;
+                Person.root.partner.min_share_percent = 0.5;
             }
         } else {
+            // Root has no partner
             if (Person.root.isParental1Alive) {
-                Person.root.distributeToParental1(1 / 1, 1 / 2, true);
+                // Root has decendants (children, grandchildren...) (parental 1)
+                Person.root.distributeToParental1(1, 0.5);
             } else if (Person.root.isParental2Alive) {
-                Person.root.distributeToParental2(1 / 1, 1 / 2);
+                // Root has parents or their decendants (siblings, nephews & nieces...) (parental 2)
+                Person.root.distributeToParental2(1);
+                // Root has grandparents or their decendants (parental 3)
             } else if (Person.root.isParental3Alive) {
-                Person.root.distributeToParental3(1 / 1);
+                Person.root.distributeToParental3(1);
             }
         }
 
@@ -308,8 +316,8 @@ class Person {
 
     /// Distribution
 
-    distributeToParental1(percent, mandatorypart = 0, ignorealive = false) {
-        if (this.alive && !ignorealive) {
+    distributeToParental1(percent, mandatorypart = 0) {
+        if (this.alive) {
             this.share_percent += percent;
             this.min_share_percent += percent * mandatorypart;
         } else {
@@ -321,24 +329,17 @@ class Person {
         }
     }
 
-    distributeToParental2(percent, mandatorypart = 0) {
+    distributeToParental2(percent) {
         let p1 = this.parent1 && this.parent1.isTreeAlive;
         let p2 = this.parent2 && this.parent2.isTreeAlive;
 
         if (p1 && p2) {
             this.parent1.distributeToParental1(percent / 2);
             this.parent2.distributeToParental1(percent / 2);
-
-            if (this.parent1.alive) this.parent1.min_share_percent = (percent / 2) * mandatorypart;
-            if (this.parent2.alive) this.parent2.min_share_percent = (percent / 2) * mandatorypart;
         } else if (p1) {
             this.parent1.distributeToParental1(percent);
-
-            if (this.parent1.alive) this.parent1.min_share_percent = percent * mandatorypart;
         } else if (p2) {
             this.parent2.distributeToParental1(percent);
-
-            if (this.parent2.alive) this.parent2.min_share_percent = percent * mandatorypart;
         }
     }
 
@@ -347,12 +348,12 @@ class Person {
         let p2 = (this.parent2 && this.parent2.isParental2Alive);
 
         if (p1 && p2) {
-            this.parent1.distributeToParental2(percent / 2, 0);
-            this.parent2.distributeToParental2(percent / 2, 0);
+            this.parent1.distributeToParental2(percent / 2);
+            this.parent2.distributeToParental2(percent / 2);
         } else if (p1) {
-            this.parent1.distributeToParental2(percent, 0);
+            this.parent1.distributeToParental2(percent);
         } else if (p2) {
-            this.parent2.distributeToParental2(percent, 0);
+            this.parent2.distributeToParental2(percent);
         }
     }
 }
