@@ -18,8 +18,6 @@ class Person {
     static everyoneById = {}
     static root = null;
 
-    static highestid = 0;
-
     static free_quota_percent = 0;
     static free_quota_absolute = 0;
 
@@ -117,7 +115,6 @@ class Person {
     }
 
     static importList(persons) {
-        Person.highestid = 0;
         Person.everyoneById = {};
         Person.root = null;
         for (let pdata of persons) {
@@ -135,10 +132,14 @@ class Person {
         }
     }
 
+    static getNextId() {
+        return Math.max(...Person.everyone.map(p => p.id), -1) + 1
+    }
+
     // Constructor
 
     constructor(name, alive, isroot = false, customid = null) {
-        this.id = customid === null ? Person.highestid++ : customid;
+        this.id = customid === null ? Person.getNextId() : customid;
         this.name = String(name);
         this.alive = Boolean(alive);
         this.generation = null;
@@ -206,7 +207,7 @@ class Person {
     }
 
     get isRoot() {
-        return Person.root === this;
+        return Person.root.id === this.id;
     }
 
     /// Display
@@ -580,7 +581,7 @@ class Interface {
             Person.importList(data.everyone);
             FamilyTreePerson.updateAll();
             FamilyTreePerson.importPositionList(data.positions);
-            Interface.select(data.selectedItemId);
+            if (data.selectedItemId !== null) Interface.select(data.selectedItemId);
             if (data.hideInfotexts) Interface.toggleInfotexts();
 
             return true;
@@ -595,7 +596,7 @@ class Interface {
             value: document.getElementById("valueinput").value,
             everyone: Person.exportList(),
             positions: FamilyTreePerson.exportPositionList(),
-            selectedItemId: Interface.selectedItem.id,
+            selectedItemId: Interface.selectedItem ? Interface.selectedItem.id : null,
             hideInfotexts: Interface.hideInfotexts,
         }
         var datastr = encodeURIComponent(JSON.stringify(data));
