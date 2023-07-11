@@ -957,6 +957,11 @@ class FamilyTree {
         FamilyTree.zoom(true, scale / FamilyTree.stage.scaleX());
     }
 
+    static center() {
+        FamilyTree.stage.position({ x: FamilyTree.stage.width() /2, y: 20 });
+        FamilyTree.stage.batchDraw();
+    }
+
     /// Context menu
 
     static showContextMenu() {
@@ -1075,18 +1080,19 @@ window.addEventListener('load', () => {
         Interface.select(p.id);
 
         FamilyTreePerson.importPositionList([
-            {id: 0, x: 650},
-            {id: 1, x: 1090},
-            {id: 2, x: 210},
-            {id: 3, x: 0},
-            {id: 4, x: 420},
-            {id: 5, x: 1090},
-            {id: 6, x: 880},
-            {id: 7, x: 1300},
+            { id: 0, x: -200 },
+            { id: 1, x: 450 },
+            { id: 2, x: -640 },
+            { id: 3, x: -850 },
+            { id: 4, x: -430 },
+            { id: 5, x: 240 },
+            { id: 6, x: 30 },
+            { id: 7, x: 450 },
         ]);
     }
 
     FamilyTreePerson.updateAll();
     FamilyTree.stage.batchDraw();
+    FamilyTree.center();
     Interface.exportToUrl();
 });
