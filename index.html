@@ -25,7 +25,7 @@
             <div class="collapse navbar-collapse" id="mainmenubar">
                 <ul class="navbar-nav" id="menucontainer">
                     <li class="nav-item dropdown">
-                        <a id="menu_select_toggle" class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                        <a id="menu_select_toggle" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                             Auswählen
                         </a>
                         <div id="menu_select" class="dropdown-menu dropdown-menu-dark">
@@ -33,7 +33,7 @@
                         </div>
                     </li>
                     <li class="nav-item dropdown">
-                        <a id="menu_action_toggle" class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                        <a id="menu_action_toggle" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                             Aktion
                         </a>
                         <div id="menu_action" class="dropdown-menu dropdown-menu-dark">
@@ -41,7 +41,7 @@
                         </div>
                     </li>
                     <li class="nav-item dropdown">
-                        <a id="menu_infos_toggle" class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                        <a id="menu_infos_toggle" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                             Infos
                         </a>
                         <div id="menu_infos" class="dropdown-menu dropdown-menu-dark">
@@ -49,22 +49,22 @@
                         </div>
                     </li>
                     <li class="nav-item dropdown">
-                        <a id="menu_view_toggle" class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                        <a id="menu_view_toggle" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                             Ansicht
                         </a>
                         <div id="menu_view" class="dropdown-menu dropdown-menu-dark">
                             <strong class="dropdown-header">Zoom</strong>
-                            <a class="dropdown-item" href="#" onclick="FamilyTree.zoom(true, 1.25);">Zoom +</a>
-                            <a class="dropdown-item" href="#" onclick="FamilyTree.zoom(false, 1.25);">Zoom -</a>
-                            <a class="dropdown-item" href="#" onclick="FamilyTree.zoomAbsolute(1);">Reset Zoom</a>
+                            <div class="dropdown-item" onclick="FamilyTree.zoom(true, 1.25);">Zoom +</div>
+                            <div class="dropdown-item" onclick="FamilyTree.zoom(false, 1.25);">Zoom -</div>
+                            <div class="dropdown-item" onclick="FamilyTree.zoomAbsolute(1);">Reset Zoom</div>
                             
                             <div class="dropdown-divider"></div>
                             <strong class="dropdown-header">Tools</strong>
-                            <a id="toggleInfotexts" class="dropdown-item" href="#" onclick="Interface.toggleInfotexts();">Infotexte verstecken</a>
+                            <div id="toggleInfotexts" class="dropdown-item" onclick="Interface.toggleInfotexts();">Infotexte verstecken</div>
                             
                             <div class="dropdown-divider"></div>
                             <strong class="dropdown-header">Export</strong>
-                            <a class="dropdown-item" href="#" onclick="FamilyTree.exportPNG();">Export .png</a>
+                            <div class="dropdown-item" onclick="FamilyTree.exportPNG();">Export .png</div>
                             <a id="export-url" class="dropdown-item" href="">URL (right click to copy)</a>
                         </div>
                     </li>

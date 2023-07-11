@@ -382,7 +382,7 @@ class Interface {
     static _menu_setItems(menu, items) {
         menu.innerHTML = "";
         for (let item of items) {
-            let elem = document.createElement(item.element || "a");
+            let elem = document.createElement(item.element || "div");
             elem.innerText = item.text || "";
             if (item.innerHTML) elem.innerHTML = item.innerHTML;
             elem.setAttribute("class", "dropdown-item");
@@ -422,7 +422,7 @@ class Interface {
                 items.push({ element: "div", class: "dropdown-divider" });
                 items.push({ element: "strong", class: "dropdown-header", text: "Ändern" });
                 if (!Interface.selectedItem.isRoot) items.push({ text: "Lebend / Tot", onclick: "Interface.toggleAlive();", class: Interface.selectedItem.alive ? "dropdown-item active" : "dropdown-item" });
-                if (Interface.selectedItem.canDelete) items.push({ text: "Löschen (inkl. Nachkommen)", onclick: "Interface.delete();" });
+                if (Interface.selectedItem.canDelete) items.push({ text: "Löschen (inkl. Nachkommen)", onclick: "Interface.delete();", class: "dropdown-item text-danger" });
             }
             if (!Interface.selectedItem.isPartner) { // Allow children for everyone except partner
                 items.push({ element: "div", class: "dropdown-divider" });

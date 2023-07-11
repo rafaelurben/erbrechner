@@ -25,6 +25,11 @@ body, #app {
 
 .dropdown-item {
     margin-right: 10px;
+    cursor: pointer;
+}
+
+.dropdown-toggle {
+    cursor: pointer;
 }
 
 /* Remove arrow buttons in number input */
